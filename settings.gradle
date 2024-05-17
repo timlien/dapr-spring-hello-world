@@ -1,2 +1,3 @@
 rootProject.name = 'dapr-spring-hello'
+include 'hello-service'
 
