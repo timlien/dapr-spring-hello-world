@@ -13,7 +13,6 @@ spec:
         dapr.io/app-port: "8080"
         dapr.io/enabled: "true"
         dapr.io/log-level: "debug"
-        dpar.op/http-port: "8080"
       labels:
         app: hello-service
         app.kubernetes.io/name: hello-service
