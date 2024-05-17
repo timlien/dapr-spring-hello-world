@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: world-service-deployment
+spec:
+  selector:
+    matchLabels:
+      app: world-service
+  template:
+    metadata:
+      annotations:
+        dapr.io/app-id: world-service
+        dapr.io/app-port: "8090"
+        dapr.io/enabled: "true"
+        dapr.io/log-level: "debug"
+      labels:
+        app: world-service
+        app.kubernetes.io/name: world-service
+        app.kubernetes.io/part-of: world-service
+        app.kubernetes.io/version: 1.0.0
+    spec:
+      containers:
+        - name: world-service
+          image: docker.io/timlien/world-service:1.0.0
+          imagePullPolicy: Always
+          env:
+            - name: JAVA_OPTS
+              value: "-XX:+UseParallelGC -XX:ActiveProcessorCount=1 -XX:MaxRAMPercentage=75 -XX:TieredStopAtLevel=1"
+            - name: PUBLIC_IP
+              value: localhost:8090
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8090
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8090
+          resources:
+            limits:
+              cpu: "1"
+              memory: "1Gi"
+            requests:
+              cpu: "1"
+              memory: "1Gi"
+          ports:
+            - containerPort: 8090
