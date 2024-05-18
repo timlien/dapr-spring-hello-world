@@ -1,33 +1,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: world-service-deployment
+  name: exclamation-service-deployment
 spec:
   selector:
     matchLabels:
-      app: world-service
+      app: exclamation-service
   template:
     metadata:
       annotations:
-        dapr.io/app-id: world-service
-        dapr.io/app-port: "8080"
+        dapr.io/app-id: exclamation-service
+        dapr.io/app-port: "5000"
         dapr.io/enabled: "true"
+        dapr.io/app-protocol: "grpc"
         dapr.io/log-level: "debug"
       labels:
-        app: world-service
-        app.kubernetes.io/name: world-service
-        app.kubernetes.io/part-of: world-service
+        app: exclamation-service
+        app.kubernetes.io/name: exclamation-service
+        app.kubernetes.io/part-of: exclamation-service
         app.kubernetes.io/version: 1.0.0
     spec:
       containers:
-        - name: world-service
-          image: docker.io/timlien/world-service:1.0.0
+        - name: exclamation-service
+          image: docker.io/timlien/exclamation-service:1.0.0
           imagePullPolicy: Always
           env:
             - name: JAVA_OPTS
               value: "-XX:+UseParallelGC -XX:ActiveProcessorCount=1 -XX:MaxRAMPercentage=75 -XX:TieredStopAtLevel=1"
             - name: PUBLIC_IP
-              value: localhost:8080
+              value: localhost:5000
           livenessProbe:
             httpGet:
               path: /actuator/health
@@ -44,4 +45,4 @@ spec:
               cpu: "1"
               memory: "1Gi"
           ports:
-            - containerPort: 8080
+            - containerPort: 5000

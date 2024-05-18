@@ -2,6 +2,12 @@
 
 This project is a Spring Boot Hello World App for Dapr. It provides a way to interact with Dapr from Spring Boot applications.
 
+```mermaid
+flowchart LR
+    sv1(hello-service) -- http --> sv2(world-service)
+    sv1(hello-service) -- grpc --> sv3(exclamation-service)
+```
+
 ### Prerequisites
 
 - Kubernetes cluster

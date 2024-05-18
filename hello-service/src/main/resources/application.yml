@@ -11,3 +11,9 @@ management:
       enabled: true
     livenessstate:
       enabled: true
+
+grpc:
+  client:
+    exclamation-service:
+      address: static://localhost:50001 # dapr sidecar gprc port
+      negotiationType: PLAINTEXT

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package user;
+
+import "google/protobuf/empty.proto";
+
+option java_multiple_files = true;
+option java_package = "com.tingshulien.exclamation";
+
+service ExclamationService {
+  rpc GetExclamation(google.protobuf.Empty) returns (ExclamationResponse);
+}
+
+message ExclamationResponse {
+  string exclamation = 1;
+}

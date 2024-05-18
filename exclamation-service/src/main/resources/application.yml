@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: exclamation-service
+
+server:
+  port: 8080
+
+grpc:
+  server:
+    port: 5000

@@ -15,8 +15,8 @@ public class WorldService {
 
   private final DaprClient daprClient;
 
-  public WorldResponse getWorld() {
-    return daprClient.invokeMethod(APP_ID, METHOD_NAME, null, HttpExtension.GET, WorldResponse.class).block();
+  public String getNation() {
+    return daprClient.invokeMethod(APP_ID, METHOD_NAME, null, HttpExtension.GET, NationResponse.class).block().name();
   }
 
 }

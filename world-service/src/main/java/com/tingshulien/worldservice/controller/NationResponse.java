@@ -1,5 +1,5 @@
 package com.tingshulien.worldservice.controller;
 
-public record WorldResponse(String nation) {
+public record NationResponse(String name) {
 
 }
